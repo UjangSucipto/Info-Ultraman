@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informasi Ultraman Heisei</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        select, button {
+            margin-top: 10px;
+        }
+        #info {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Informasi Ultraman Heisei</h1>
+    <label for="ultraman-select">Pilih seri Ultraman:</label>
+    <select id="ultraman-select">
+        <option value="">--Pilih Seri--</option>
+        <option value="Ultraman Tiga">Ultraman Tiga</option>
+        <option value="Ultraman Dyna">Ultraman Dyna</option>
+        <option value="Ultraman Gaia">Ultraman Gaia</option>
+        <option value="Ultraman Nexus">Ultraman Nexus</option>
+        <option value="Ultraman Max">Ultraman Max</option>
+        <option value="Ultraman Mebius">Ultraman Mebius</option>
+        <option value="Ultraman Zero">Ultraman Zero</option>
+    </select>
+    <button onclick="tampilkanInfo()">Tampilkan Info</button>
+
+    <div id="info"></div>
+
+    <script>
+        const infoUltraman = {
+            "Ultraman Tiga": {
+                "Ciri Khas Serangan Spesial": "Final Flash - Sebuah serangan energi kuat yang diluncurkan dari tangan Ultraman Tiga setelah mengumpulkan energi dari sekelilingnya.",
+                "Tipe Ultraman": "Multi-Type, Power-Type, dan Sky-Type - Tiga tipe dengan kemampuan khusus: Multi-Type untuk keseimbangan, Power-Type untuk kekuatan fisik, dan Sky-Type untuk kecepatan dan serangan udara.",
+                "Tanggal Rilis": "1996-09-07",
+            },
+            "Ultraman Dyna": {
+                "Ciri Khas Serangan Spesial": "Victory Slash - Serangan pedang energi yang kuat dari tangan Ultraman Dyna, sering digunakan untuk mengalahkan musuh besar.",
+                "Tipe Ultraman": "Flash Type, Miracle Type, dan Strong Type - Tiga tipe dengan kemampuan spesial: Flash Type untuk kecepatan, Miracle Type untuk kemampuan penyembuhan dan serangan kuat, dan Strong Type untuk kekuatan fisik.",
+                "Tanggal Rilis": "1997-09-06",
+            },
+            "Ultraman Gaia": {
+                "Ciri Khas Serangan Spesial": "Vortex Shooter - Serangan berbentuk energi yang memancarkan gelombang kejut dari tangan Ultraman Gaia.",
+                "Tipe Ultraman": "Vortex Type - Memungkinkan Gaia untuk mengendalikan energi dan memberikan berbagai jenis serangan.",
+                "Tanggal Rilis": "1998-09-05",
+            },
+            "Ultraman Nexus": {
+                "Ciri Khas Serangan Spesial": "The Final Twist - Sebuah serangan kuat dengan energi yang dihasilkan dari tubuh Nexus, biasanya digunakan untuk melawan musuh yang sangat kuat.",
+                "Tipe Ultraman": "Nexus Type - Ultraman Nexus memiliki bentuk dan kemampuan yang beragam, termasuk teknik khusus dengan bantuan dari partnernya.",
+                "Tanggal Rilis": "2004-10-02",
+            },
+            "Ultraman Max": {
+                "Ciri Khas Serangan Spesial": "Max Galaxy - Serangan energi yang sangat kuat, yang memanfaatkan kekuatan kosmik untuk menghancurkan musuh.",
+                "Tipe Ultraman": "Max Type - Tipe yang mengedepankan kekuatan fisik dan kemampuan untuk mengakses berbagai teknik serangan.",
+                "Tanggal Rilis": "2005-07-02",
+            },
+            "Ultraman Mebius": {
+                "Ciri Khas Serangan Spesial": "Mebium Slash - Sebuah serangan pedang energi dari tangan Ultraman Mebius yang sangat kuat.",
+                "Tipe Ultraman": "Mebius Type - Tipe yang mengandalkan teknik fisik dan serangan energi, dengan kemampuan khusus untuk mengakses berbagai serangan tambahan.",
+                "Tanggal Rilis": "2006-09-02",
+            },
+            "Ultraman Zero": {
+                "Ciri Khas Serangan Spesial": "Zero Slugger - Dua disk energi yang dapat digunakan untuk memotong musuh atau membenturkan musuh dengan kekuatan luar biasa.",
+                "Tipe Ultraman": "Zero Type - Tipe dengan kemampuan serba bisa dan akses ke berbagai teknik serta bentuk dari berbagai Ultraman.",
+                "Tanggal Rilis": "2009-12-23",
+            }
+        };
+
+        function calculateAge(releaseDate) {
+            const today = new Date();
+            const release = new Date(releaseDate);
+            let age = today.getFullYear() - release.getFullYear();
+            const monthDifference = today.getMonth() - release.getMonth();
+            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < release.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
+        function tampilkanInfo() {
+            const selectElement = document.getElementById('ultraman-select');
+            const infoDiv = document.getElementById('info');
+            const pilihan = selectElement.value;
+
+            if (pilihan) {
+                const info = infoUltraman[pilihan];
+                const age = calculateAge(info["Tanggal Rilis"]);
+                infoDiv.innerHTML = `
+                    <h2>Informasi untuk ${pilihan}:</h2>
+                    <p><strong>Ciri Khas Serangan Spesial:</strong> ${info["Ciri Khas Serangan Spesial"]}</p>
+                    <p><strong>Tipe Ultraman:</strong> ${info["Tipe Ultraman"]}</p>
+                    <p><strong>Tanggal Rilis:</strong> ${info["Tanggal Rilis"]}</p>
+                    <p><strong>Umur:</strong> ${age} tahun</p>
+                `;
+            } else {
+                infoDiv.innerHTML = "<p>Mohon pilih seri Ultraman dari daftar.</p>";
+            }
+        }
+    </script>
+</body>
+</html>
