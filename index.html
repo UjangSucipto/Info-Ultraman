@@ -7,32 +7,64 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            background: linear-gradient(to bottom right, #b30000, #ff9999); /* Gradient inspired by Ultraman Mebius */
+        }
+        .container {
             margin: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8); /* Slightly transparent white background for readability */
+            border-radius: 10px;
         }
         select, button {
             margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            cursor: pointer;
+            background-color: #b30000; /* Dark red button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #cc0000; /* Lighter red on hover */
         }
         #info {
             margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1, h2 {
+            color: #b30000; /* Dark red for headers */
         }
     </style>
 </head>
 <body>
-    <h1>Informasi Ultraman Heisei</h1>
-    <label for="ultraman-select">Pilih seri Ultraman:</label>
-    <select id="ultraman-select">
-        <option value="">--Pilih Seri--</option>
-        <option value="Ultraman Tiga">Ultraman Tiga</option>
-        <option value="Ultraman Dyna">Ultraman Dyna</option>
-        <option value="Ultraman Gaia">Ultraman Gaia</option>
-        <option value="Ultraman Nexus">Ultraman Nexus</option>
-        <option value="Ultraman Max">Ultraman Max</option>
-        <option value="Ultraman Mebius">Ultraman Mebius</option>
-        <option value="Ultraman Zero">Ultraman Zero</option>
-    </select>
-    <button onclick="tampilkanInfo()">Tampilkan Info</button>
+    <div class="container">
+        <h1>Informasi Ultraman Heisei</h1>
+        <label for="ultraman-select">Pilih seri Ultraman:</label>
+        <select id="ultraman-select">
+            <option value="">--Pilih Seri--</option>
+            <option value="Ultraman Tiga">Ultraman Tiga</option>
+            <option value="Ultraman Dyna">Ultraman Dyna</option>
+            <option value="Ultraman Gaia">Ultraman Gaia</option>
+            <option value="Ultraman Nexus">Ultraman Nexus</option>
+            <option value="Ultraman Max">Ultraman Max</option>
+            <option value="Ultraman Mebius">Ultraman Mebius</option>
+            <option value="Ultraman Zero">Ultraman Zero</option>
+        </select>
+        <button onclick="tampilkanInfo()">Tampilkan Info</button>
 
-    <div id="info"></div>
+        <div id="info"></div>
+    </div>
 
     <script>
         const infoUltraman = {
@@ -73,17 +105,6 @@
             }
         };
 
-        function calculateAge(releaseDate) {
-            const today = new Date();
-            const release = new Date(releaseDate);
-            let age = today.getFullYear() - release.getFullYear();
-            const monthDifference = today.getMonth() - release.getMonth();
-            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < release.getDate())) {
-                age--;
-            }
-            return age;
-        }
-
         function tampilkanInfo() {
             const selectElement = document.getElementById('ultraman-select');
             const infoDiv = document.getElementById('info');
@@ -91,13 +112,11 @@
 
             if (pilihan) {
                 const info = infoUltraman[pilihan];
-                const age = calculateAge(info["Tanggal Rilis"]);
                 infoDiv.innerHTML = `
                     <h2>Informasi untuk ${pilihan}:</h2>
                     <p><strong>Ciri Khas Serangan Spesial:</strong> ${info["Ciri Khas Serangan Spesial"]}</p>
                     <p><strong>Tipe Ultraman:</strong> ${info["Tipe Ultraman"]}</p>
                     <p><strong>Tanggal Rilis:</strong> ${info["Tanggal Rilis"]}</p>
-                    <p><strong>Umur:</strong> ${age} tahun</p>
                 `;
             } else {
                 infoDiv.innerHTML = "<p>Mohon pilih seri Ultraman dari daftar.</p>";
